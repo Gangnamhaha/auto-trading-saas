@@ -6,3 +6,5 @@ export * from './paper'
 export * from './risk'
 export * from './strategy'
 export * from './backtest'
+
+export * from './data'
