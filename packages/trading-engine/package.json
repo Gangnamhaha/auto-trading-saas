@@ -7,7 +7,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "daemon": "bun run src/cli.ts",
+    "daemon:paper": "TRADING_MODE=paper bun run src/cli.ts",
+    "daemon:live": "TRADING_MODE=live bun run src/cli.ts"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.13.2",
