@@ -1,0 +1,9 @@
+bun test --filter=encryption
+workdir: /Users/cpeoy/auto-trading-saas/packages/shared
+
+bun test v1.3.10 (30e609e0)
+
+ 4 pass
+ 0 fail
+ 5 expect() calls
+Ran 4 tests across 1 file. [11.00ms]

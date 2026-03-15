@@ -1,0 +1,12 @@
+{
+  "command": "bun test --filter=auth",
+  "workdir": "/Users/cpeoy/auto-trading-saas/packages/web",
+  "result": {
+    "status": "pass",
+    "passed": 10,
+    "failed": 0,
+    "expectCalls": 13,
+    "summary": "Ran 10 tests across 2 files."
+  },
+  "rawOutput": "bun test v1.3.10 (30e609e0)\\n\\n 10 pass\\n 0 fail\\n 13 expect() calls\\nRan 10 tests across 2 files. [999.00ms]"
+}

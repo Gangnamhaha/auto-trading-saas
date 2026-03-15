@@ -85,3 +85,103 @@
 - Task 1: Project scaffolding (monorepo + CI/CD)
 - Working directory: /Users/cpeoy/auto-trading-saas
 - Git already initialized
+
+## [2026-03-15] Task 1: Monorepo Initialization ✓ COMPLETE
+
+### Monorepo Structure Created
+
+```
+packages/
+├── trading-engine/     # TypeScript Node.js trading engine
+│   ├── src/
+│   ├── src/__tests__/placeholder.test.ts
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── vitest.config.ts
+├── web/                # Next.js 14 App Router web app
+│   ├── src/app/
+│   ├── src/__tests__/placeholder.test.ts
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── next.config.mjs
+│   ├── playwright.config.ts
+│   └── vitest.config.ts
+└── shared/             # Shared types and utilities
+    ├── src/
+    ├── package.json
+    └── tsconfig.json
+```
+
+### Key Configuration Files
+
+- **Root package.json**: Workspaces configured, packageManager set to bun@1.3.10
+- **turbo.json**: Pipeline configured for build/test/lint/typecheck/dev
+- **tsconfig.json**: Strict mode enabled, ES2022 target, bundler module resolution
+- **.eslintrc.json**: TypeScript ESLint with @typescript-eslint plugins
+- **.prettierrc**: Semi-false, single quotes, 2-space tabs, trailing commas
+- **.commitlintrc.json**: Conventional commits enforced
+- **.lintstagedrc.json**: Pre-commit hook runs eslint + prettier on staged files
+- **.husky/**: Git hooks installed (pre-commit, commit-msg)
+- **docker-compose.yml**: PostgreSQL 16 + Redis 7 (Alpine images)
+- **.env.example**: Template for all required environment variables
+- **.github/workflows/ci.yml**: GitHub Actions CI pipeline
+
+### Verification Results
+
+✓ `bun install` — 1104 packages installed successfully
+✓ `bun run typecheck` — All 3 packages pass TypeScript strict mode
+✓ `bun run lint` — ESLint + Next.js lint pass, no warnings
+✓ `bun run test` — 2 test files pass (placeholder tests in trading-engine + web)
+✓ `git commit -m "bad message"` — Rejected by commitlint (type-empty, subject-empty)
+✓ `git commit -m "chore: initialize monorepo with CI/CD, testing, and linting"` — Accepted
+
+### Important Implementation Notes
+
+1. **Next.js Config**: Must use `.mjs` extension (not `.ts` or `.js`) because package.json has `"type": "module"`
+2. **Web tsconfig.json**: Must explicitly set `rootDir: "./src"` and include `"types": ["vitest/globals"]` for test globals
+3. **Vitest**: Web package uses `jsdom` environment, trading-engine uses `node` environment
+4. **Husky**: Automatically installed via `prepare` script in root package.json
+5. **Turbo**: Requires `packageManager` field in root package.json for workspace detection
+6. **Docker Compose**: Removed obsolete `version: '3.8'` field (Docker Compose v2 doesn't require it)
+
+### Packages Installed
+
+**Root devDependencies:**
+
+- @commitlint/cli, @commitlint/config-conventional
+- @typescript-eslint/eslint-plugin, @typescript-eslint/parser
+- eslint, prettier, husky, lint-staged
+- turbo, typescript, vitest
+
+**Web devDependencies (additional):**
+
+- @playwright/test, @types/react, @types/react-dom, @types/node
+- eslint-config-next, jsdom
+
+### Next Steps (Task 2+)
+
+- Implement database schema (Drizzle ORM migrations)
+- Set up authentication (JWT + refresh token)
+- Implement KIS API client with rate limiting
+- Create trading engine core logic
+- Build web UI for strategy management
+
+## [2026-03-15] Task 2: Auth, Schema, Encryption
+
+### Drizzle + Postgres Patterns Applied
+
+- `packages/shared/src/db/schema.ts` defines `users`, `broker_connections`, `strategies`, `trades`, `trade_logs` with UUID PKs, FK cascade on user-owned entities, and JSONB defaults.
+- `packages/shared/drizzle.config.ts` uses drizzle-kit `defineConfig` with `schema`, `out`, `dialect: 'postgresql'`, and `dbCredentials.url` from `DATABASE_URL`.
+- Migration SQL can live under `packages/shared/src/db/migrations/` for traceable schema history.
+
+### Auth + Crypto Implementation Notes
+
+- JWT utilities are split by token purpose: access (`15m`) and refresh (`7d`), each with dedicated env secret.
+- Password storage uses `bcryptjs` only (`hash` + `compare`), never reversible or plain text.
+- Broker credential crypto uses AES-256-GCM with random 96-bit IV and output format `iv:authTag:ciphertext` (hex).
+- Encryption keys must be validated as 64-char hex (32 bytes) and must come from env, not source literals.
+
+### Verification + Build Gotcha
+
+- `bun test --filter=auth` and `bun test --filter=encryption` should be run per-package to avoid unrelated workspace test runner incompatibilities.
+- In Next.js package tsconfig, `rootDir` must be `"."` (not inherited root default and not `"./src"`) when including `.next/types/**/*.ts`, otherwise `TS6059` fails during `tsc`/`next build`.
