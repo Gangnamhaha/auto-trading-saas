@@ -147,7 +147,7 @@ export class TradingDaemon extends EventEmitter {
 
   async tick(): Promise<void> {
     if (this.state !== 'running') return
-    if (!MarketHours.isMarketOpen()) {
+    if (!MarketHours.isMarketOpen('KR')) {
       this.emit('market_closed')
       return
     }
@@ -203,7 +203,7 @@ export class TradingDaemon extends EventEmitter {
       activatedStrategies: this.strategies.size,
       totalTradesExecued: this.totalTrades,
       lastTickAt: this.lastTickAt,
-      marketOpen: MarketHours.isMarketOpen(),
+      marketOpen: MarketHours.isMarketOpen('KR'),
     }
   }
 

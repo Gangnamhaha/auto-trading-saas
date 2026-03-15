@@ -121,21 +121,21 @@ describe('MarketDataStore', () => {
 
 describe('MarketHours', () => {
   it('open during KST trading hours', () => {
-    expect(MarketHours.isMarketOpen(new Date('2024-01-02T00:30:00.000Z'))).toBe(
-      true
-    )
+    expect(
+      MarketHours.isMarketOpen('KR', new Date('2024-01-02T00:30:00.000Z'))
+    ).toBe(true)
   })
 
   it('closed before market', () => {
-    expect(MarketHours.isMarketOpen(new Date('2024-01-02T23:30:00.000Z'))).toBe(
-      false
-    )
+    expect(
+      MarketHours.isMarketOpen('KR', new Date('2024-01-02T23:30:00.000Z'))
+    ).toBe(false)
   })
 
   it('closed on weekend', () => {
-    expect(MarketHours.isMarketOpen(new Date('2024-01-06T01:00:00.000Z'))).toBe(
-      false
-    )
+    expect(
+      MarketHours.isMarketOpen('KR', new Date('2024-01-06T01:00:00.000Z'))
+    ).toBe(false)
   })
 })
 
