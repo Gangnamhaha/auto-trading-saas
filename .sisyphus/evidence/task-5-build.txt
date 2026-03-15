@@ -1,0 +1,46 @@
+# Task 5: Core Dashboard Pages - Build Evidence
+
+## Build Output
+```
+$ next build
+  ▲ Next.js 14.2.35
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+ ✓ Generating static pages (17/17)
+   Finalizing page optimization ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    3.19 kB         108 kB
+├ ○ /_not-found                          875 B          88.2 kB
+├ ƒ /api/auth/login                      0 B                0 B
+├ ƒ /api/auth/refresh                    0 B                0 B
+├ ƒ /api/auth/signup                     0 B                0 B
+├ ƒ /api/billing/cancel                  0 B                0 B
+├ ƒ /api/billing/status                  0 B                0 B
+├ ƒ /api/billing/subscribe               0 B                0 B
+├ ƒ /api/billing/webhook                 0 B                0 B
+├ ○ /backtest                            4.1 kB          209 kB
+├ ○ /dashboard                           2.7 kB          208 kB
+├ ○ /login                               2.86 kB         107 kB
+├ ○ /settings/broker                     4.75 kB         100 kB
+├ ○ /signup                              3.03 kB         107 kB
+└ ○ /strategies                          4.63 kB         109 kB
+```
+
+## Pages Implemented
+1. Landing Page (/) - Hero, features, pricing
+2. Login (/login) - Email/password form
+3. Signup (/signup) - Registration form with terms
+4. Dashboard (/dashboard) - Portfolio summary, P&L chart, trades
+5. Strategies (/strategies) - Strategy cards with toggles
+6. Backtest (/backtest) - Backtest configuration and results
+7. Broker Settings (/settings/broker) - KIS API connection
+
+## Components Created
+- UI: button, card, input, badge
+- Layout: header, sidebar, footer, disclaimer
+
+## Commit
+cb98ef9 feat(ui): add core dashboard pages with responsive design

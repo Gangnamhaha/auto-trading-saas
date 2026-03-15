@@ -1,0 +1,72 @@
+bun test v1.3.10 (30e609e0)
+
+src/__tests__/broker.test.ts:
+[KIS] GET https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-price?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=005930 {
+  "content-type": "application/json",
+  authorization: "Bearer ****9999",
+  appkey: "****1234",
+  appsecret: "****5678",
+  tr_id: "FHKST01010100",
+  custtype: "P",
+}
+[KIS] POST https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/trading/order-cash {
+  "content-type": "application/json",
+  authorization: "Bearer ****9999",
+  appkey: "****1234",
+  appsecret: "****5678",
+  tr_id: "VTTC0802U",
+  custtype: "P",
+}
+[KIS] GET https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/trading/inquire-balance?CANO=12345678&ACNT_PRDT_CD=01&AFHR_FLPR_YN=N&OFL_YN=&INQR_DVSN=02&UNPR_DVSN=01&FUND_STTL_ICLD_YN=N&FNCG_AMT_AUTO_RDPT_YN=N&PRCS_DVSN=00&CTX_AREA_FK100=&CTX_AREA_NK100= {
+  "content-type": "application/json",
+  authorization: "Bearer ****9999",
+  appkey: "****1234",
+  appsecret: "****5678",
+  tr_id: "VTTC8434R",
+  custtype: "P",
+}
+[KIS] POST https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/trading/order-cash {
+  "content-type": "application/json",
+  authorization: "Bearer ****9999",
+  appkey: "****1234",
+  appsecret: "****5678",
+  tr_id: "VTTC0802U",
+  custtype: "P",
+}
+[KIS] POST https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/trading/order-cash {
+  "content-type": "application/json",
+  authorization: "Bearer ****9999",
+  appkey: "****1234",
+  appsecret: "****5678",
+  tr_id: "VTTC0801U",
+  custtype: "P",
+}
+[KIS] GET https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-price?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=005930 {
+  "content-type": "application/json",
+  authorization: "Bearer ****9999",
+  appkey: "****1234",
+  appsecret: "****5678",
+  tr_id: "FHKST01010100",
+  custtype: "P",
+}
+[KIS] GET https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-price?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=005930 {
+  "content-type": "application/json",
+  authorization: "Bearer ****9999",
+  appkey: "****1234",
+  appsecret: "****5678",
+  tr_id: "FHKST01010100",
+  custtype: "P",
+}
+[KIS] GET https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-price?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=005930 {
+  "content-type": "application/json",
+  authorization: "Bearer ****2222",
+  appkey: "****1234",
+  appsecret: "****5678",
+  tr_id: "FHKST01010100",
+  custtype: "P",
+}
+
+ 14 pass
+ 0 fail
+ 26 expect() calls
+Ran 14 tests across 2 files. [9.23s]
