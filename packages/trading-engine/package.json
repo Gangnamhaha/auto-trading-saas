@@ -15,5 +15,8 @@
     "eslint": "^8.55.0",
     "typescript": "^5.3.3",
     "vitest": "^1.0.4"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
   }
 }
