@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    console.log('[Waitlist] New signup:', email)
+    // TODO: send welcome email via Resend
     trackWaitlistJoined(email)
 
     return NextResponse.json({
@@ -31,6 +31,7 @@ export async function POST(request: NextRequest) {
         '대기 신청이 완료되었습니다. 정식 출시 시 이메일로 알려드리겠습니다.',
     })
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('[Waitlist] Error:', error)
     return NextResponse.json(
       {

@@ -41,7 +41,7 @@ const features = [
   {
     icon: Settings2,
     title: '📊 노코드 전략 설정',
-    description: '코딩 없이 드래그 앤 드롭으로 전략 구성',
+    description: '간단한 설정으로 전략 구성',
   },
   {
     icon: FlaskConical,

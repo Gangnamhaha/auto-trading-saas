@@ -47,6 +47,7 @@ export function trackEvent(
 ): void {
   // Development mode: log to console
   if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
     console.log('[Analytics]', eventName, properties || {})
     return
   }
@@ -92,6 +93,7 @@ export function trackCTAClick(
  */
 export function identifyUser(userId: string): void {
   if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
     console.log('[Analytics] Identify user:', userId)
     return
   }
@@ -106,6 +108,7 @@ export function identifyUser(userId: string): void {
  */
 export function resetUser(): void {
   if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
     console.log('[Analytics] Reset user')
     return
   }
