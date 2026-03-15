@@ -8,3 +8,5 @@ export * from './strategy'
 export * from './backtest'
 
 export * from './data'
+export * from './daemon'
+export * from './notifications'
