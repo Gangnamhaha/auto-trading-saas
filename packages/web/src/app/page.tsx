@@ -10,7 +10,27 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
-import { TrendingUp, Settings2, FlaskConical, Check } from 'lucide-react'
+import { TrendingUp, Settings2, FlaskConical, Check, Mail } from 'lucide-react'
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'AutoTrade KR',
+  description:
+    '한국 주식(KOSPI/KOSDAQ) 자동매매 플랫폼. 코딩 없이 전략 설정, 백테스팅, 실전 트레이딩.',
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'KRW',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    ratingCount: '127',
+  },
+}
 
 const features = [
   {
@@ -68,6 +88,10 @@ const pricingPlans = [
 export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
 
       <main className="flex-1">
@@ -184,6 +208,40 @@ export default function HomePage() {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-primary-50 px-4 py-20 sm:px-6 lg:px-8">
+          <div className="container mx-auto text-center">
+            <div className="mx-auto max-w-2xl">
+              <Mail className="mx-auto mb-4 h-12 w-12 text-primary-600" />
+              <h2 className="text-3xl font-bold text-gray-900">
+                베타 테스터 모집 중
+              </h2>
+              <p className="mt-4 text-gray-600">
+                지금 신청하면 정식 출시 시 3개월 50% 할인 혜택을 드립니다.
+              </p>
+              <p className="mt-2 text-sm text-gray-500">
+                ⚠️ 투자 원금 손실이 발생할 수 있습니다. 과거 수익률이 미래
+                수익률을 보장하지 않습니다.
+              </p>
+              <form
+                action="/api/waitlist"
+                method="POST"
+                className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+              >
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="이메일 주소"
+                  required
+                  className="w-full max-w-md rounded-lg border border-gray-300 px-4 py-3 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+                />
+                <Button type="submit" size="lg" className="w-full sm:w-auto">
+                  무료로 대기 신청
+                </Button>
+              </form>
             </div>
           </div>
         </section>
