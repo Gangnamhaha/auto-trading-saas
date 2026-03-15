@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
+import { PWARegister } from '@/components/pwa/pwa-register'
 
 export const metadata: Metadata = {
   title: 'AutoTrade KR — 한국 주식 자동매매 플랫폼',
@@ -37,6 +38,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://autotrade.kr',
   },
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'AutoTrade KR',
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
+  },
 }
 
 export default function RootLayout({
@@ -64,7 +74,10 @@ export default function RootLayout({
           </Script>
         </>
       )}
-      <body className="min-h-screen bg-white antialiased">{children}</body>
+      <body className="min-h-screen bg-white antialiased">
+        {children}
+        <PWARegister />
+      </body>
     </html>
   )
 }

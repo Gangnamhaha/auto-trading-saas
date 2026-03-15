@@ -1,0 +1,31 @@
+{
+  "name": "AutoTrade KR",
+  "short_name": "AutoTrade",
+  "description": "한국/미국 주식 + 암호화폐 자동매매 플랫폼",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "/icons/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "대시보드", "url": "/dashboard" },
+    { "name": "전략 설정", "url": "/strategies" },
+    { "name": "백테스팅", "url": "/backtest" }
+  ]
+}
