@@ -1,0 +1,17 @@
+{
+  "monitors": [
+    {
+      "name": "AutoTrade KR - Web App",
+      "url": "https://autotrading.kr/api/health",
+      "type": "http",
+      "interval": 60,
+      "alertContacts": ["your-email@example.com"]
+    },
+    {
+      "name": "AutoTrade KR - Trading Engine",
+      "url": "https://engine.autotrading.kr/health",
+      "type": "http",
+      "interval": 60
+    }
+  ]
+}

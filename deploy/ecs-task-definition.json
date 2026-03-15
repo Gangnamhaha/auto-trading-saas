@@ -1,0 +1,36 @@
+{
+  "family": "autotrading-engine",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "containerDefinitions": [
+    {
+      "name": "trading-engine",
+      "image": "your-ecr-repo/trading-engine:latest",
+      "essential": true,
+      "environment": [{ "name": "NODE_ENV", "value": "production" }],
+      "secrets": [
+        { "name": "DATABASE_URL", "valueFrom": "arn:aws:secretsmanager:..." },
+        { "name": "KIS_APP_KEY", "valueFrom": "arn:aws:secretsmanager:..." }
+      ],
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -f http://localhost:3001/health || exit 1"
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3
+      },
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/autotrading-engine",
+          "awslogs-region": "ap-northeast-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

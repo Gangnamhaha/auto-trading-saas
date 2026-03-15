@@ -1,0 +1,10 @@
+FROM node:20-alpine
+RUN npm install -g bun
+WORKDIR /app
+COPY package.json bun.lockb* ./
+COPY packages/trading-engine/package.json ./packages/trading-engine/
+COPY packages/shared/package.json ./packages/shared/
+RUN bun install --frozen-lockfile
+COPY packages/trading-engine ./packages/trading-engine
+COPY packages/shared ./packages/shared
+CMD ["bun", "run", "--cwd", "packages/trading-engine", "src/index.ts"]
