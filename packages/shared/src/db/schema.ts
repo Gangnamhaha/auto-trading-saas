@@ -21,6 +21,23 @@ export const users = pgTable('users', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 })
 
+export const subscriptions = pgTable('subscriptions', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id')
+    .notNull()
+    .unique()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  tier: varchar('tier', { length: 20 }).notNull().default('free'),
+  status: varchar('status', { length: 30 }).notNull().default('active'),
+  billingKey: text('billing_key'),
+  currentPeriodStart: timestamp('current_period_start'),
+  currentPeriodEnd: timestamp('current_period_end'),
+  gracePeriodEnd: timestamp('grace_period_end'),
+  cancelledAt: timestamp('cancelled_at'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})
+
 export const brokerConnections = pgTable('broker_connections', {
   id: uuid('id').primaryKey().defaultRandom(),
   userId: uuid('user_id')

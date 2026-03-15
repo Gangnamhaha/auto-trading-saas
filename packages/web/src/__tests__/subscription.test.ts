@@ -1,19 +1,13 @@
-import { createHmac } from 'node:crypto'
-
 import { NextRequest, NextResponse } from 'next/server'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
+import { requireTier } from '../lib/subscription/middleware'
 import { canAccessWithStatus } from '../lib/subscription/service'
-import {
-  hasAccess,
-  supportsStrategyCount,
-  type SubscriptionTier,
-} from '../lib/subscription/tiers'
+import { hasAccess, supportsStrategyCount } from '../lib/subscription/tiers'
+import { processWebhookEvent } from '../lib/subscription/webhook'
 
 afterEach(() => {
   vi.restoreAllMocks()
-  vi.resetModules()
-  vi.unstubAllEnvs()
 })
 
 describe('Subscription', () => {
@@ -96,30 +90,16 @@ describe('Subscription', () => {
   })
 
   it('returns 403 for free user trying to access pro endpoint', async () => {
-    vi.resetModules()
-
-    vi.doMock('../lib/auth/auth', () => ({
-      verifyAccessToken: () => ({
-        userId: 'user-1',
-        email: 'free@example.com',
-        subscriptionTier: 'free',
-      }),
-    }))
-
-    vi.doMock('../lib/subscription/service', () => ({
+    const guarded = requireTier('pro', {
+      getCurrentUser: async () => ({ id: 'user-1' }),
       getSubscriptionStatus: async () => ({
-        tier: 'free' as SubscriptionTier,
-        status: 'active' as const,
+        tier: 'free',
+        status: 'active',
         currentPeriodEnd: null,
         gracePeriodEnd: null,
       }),
       canAccessWithStatus: () => false,
-    }))
-
-    const { requireTier } = await import('../lib/subscription/middleware')
-    const guarded = requireTier('pro')(() =>
-      NextResponse.json({ ok: true }, { status: 200 })
-    )
+    })(() => NextResponse.json({ ok: true }, { status: 200 }))
 
     const req = new NextRequest('http://localhost/api/protected', {
       headers: {
@@ -132,20 +112,10 @@ describe('Subscription', () => {
   })
 
   it('upgrades user tier on paid webhook event', async () => {
-    vi.resetModules()
-
     const upgradeTier = vi.fn(async () => undefined)
-
-    vi.doMock('../lib/subscription/service', () => ({
-      upgradeTier,
-      cancelSubscription: vi.fn(async () => undefined),
-      handlePaymentFailure: vi.fn(async () => undefined),
-      clearBillingKey: vi.fn(async () => undefined),
-    }))
-
-    vi.stubEnv('TOSS_WEBHOOK_SECRET', 'test-webhook-secret')
-
-    const { POST } = await import('../app/api/billing/webhook/route')
+    const cancelSubscription = vi.fn(async () => undefined)
+    const handlePaymentFailure = vi.fn(async () => undefined)
+    const clearBillingKey = vi.fn(async () => undefined)
 
     const payload = JSON.stringify({
       eventType: 'PAYMENT_STATUS_CHANGED',
@@ -159,21 +129,16 @@ describe('Subscription', () => {
       },
     })
 
-    const signature = createHmac('sha256', 'test-webhook-secret')
-      .update(payload)
-      .digest('hex')
-
-    const request = new NextRequest('http://localhost/api/billing/webhook', {
-      method: 'POST',
-      body: payload,
-      headers: {
-        'Tosspayments-Signature': signature,
-      },
+    await processWebhookEvent(JSON.parse(payload), {
+      upgradeTier,
+      cancelSubscription,
+      handlePaymentFailure,
+      clearBillingKey,
     })
 
-    const response = await POST(request)
-
-    expect(response.status).toBe(200)
     expect(upgradeTier).toHaveBeenCalledWith('user-123', 'pro')
+    expect(cancelSubscription).not.toHaveBeenCalled()
+    expect(handlePaymentFailure).not.toHaveBeenCalled()
+    expect(clearBillingKey).not.toHaveBeenCalled()
   })
 })

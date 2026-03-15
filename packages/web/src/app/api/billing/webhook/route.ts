@@ -3,24 +3,9 @@ import { createHmac, timingSafeEqual } from 'node:crypto'
 import { NextResponse, type NextRequest } from 'next/server'
 
 import {
-  cancelSubscription,
-  clearBillingKey,
-  handlePaymentFailure,
-  upgradeTier,
-} from '../../../../lib/subscription/service'
-import { type SubscriptionTier } from '../../../../lib/subscription/tiers'
-
-type TossWebhookEvent = {
-  eventType?: string
-  data?: {
-    status?: string
-    customerKey?: string
-    metadata?: {
-      userId?: string
-      tier?: SubscriptionTier
-    }
-  }
-}
+  processWebhookEvent,
+  type TossWebhookEvent,
+} from '../../../../lib/subscription/webhook'
 
 function getWebhookSecret(): string {
   const secret = process.env.TOSS_WEBHOOK_SECRET
@@ -46,10 +31,6 @@ function isValidWebhookSignature(payload: string, signature: string): boolean {
   return timingSafeEqual(given, expected)
 }
 
-function parseUserId(event: TossWebhookEvent): string | null {
-  return event.data?.metadata?.userId ?? event.data?.customerKey ?? null
-}
-
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const rawBody = await req.text()
   const signature =
@@ -64,30 +45,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   }
 
   const event = JSON.parse(rawBody) as TossWebhookEvent
-  const userId = parseUserId(event)
-
-  if (!userId) {
-    return NextResponse.json({ ok: true }, { status: 200 })
-  }
-
-  if (event.eventType === 'PAYMENT_STATUS_CHANGED') {
-    if (event.data?.status === 'DONE') {
-      const tier = event.data.metadata?.tier ?? 'basic'
-      await upgradeTier(userId, tier)
-    }
-
-    if (event.data?.status === 'FAILED') {
-      await handlePaymentFailure(userId)
-    }
-
-    if (event.data?.status === 'CANCELED') {
-      await cancelSubscription(userId)
-    }
-  }
-
-  if (event.eventType === 'BILLING_KEY_DELETED') {
-    await clearBillingKey(userId)
-  }
+  await processWebhookEvent(event)
 
   return NextResponse.json({ ok: true }, { status: 200 })
 }

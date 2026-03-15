@@ -10,18 +10,31 @@ type CurrentUser = {
   id: string
 }
 
-export function requireTier(minTier: SubscriptionTier) {
+type RequireTierDeps = {
+  getCurrentUser: (req: NextRequest) => Promise<CurrentUser | null>
+  getSubscriptionStatus: typeof getSubscriptionStatus
+  canAccessWithStatus: typeof canAccessWithStatus
+}
+
+export function requireTier(
+  minTier: SubscriptionTier,
+  deps: RequireTierDeps = {
+    getCurrentUser,
+    getSubscriptionStatus,
+    canAccessWithStatus,
+  }
+) {
   return function withTier(handler: RouteHandler): RouteHandler {
     return async function withTierCheck(
       req: NextRequest
     ): Promise<NextResponse> {
-      const user = await getCurrentUser(req)
+      const user = await deps.getCurrentUser(req)
       if (!user) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
       }
 
-      const subscription = await getSubscriptionStatus(user.id)
-      if (!canAccessWithStatus(subscription, minTier)) {
+      const subscription = await deps.getSubscriptionStatus(user.id)
+      if (!deps.canAccessWithStatus(subscription, minTier)) {
         return NextResponse.json(
           {
             error: 'Subscription required',
