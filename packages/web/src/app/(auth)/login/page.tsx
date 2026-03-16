@@ -25,7 +25,7 @@ export default function LoginPage() {
     <Card>
       <CardHeader className="text-center">
         <Link href="/" className="mx-auto text-2xl font-bold text-primary-600">
-          AutoTrade
+          Alphix
         </Link>
         <CardTitle className="mt-4">로그인</CardTitle>
         <CardDescription>

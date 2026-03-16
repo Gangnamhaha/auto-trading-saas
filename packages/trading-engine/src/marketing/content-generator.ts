@@ -31,7 +31,7 @@ export class ContentGenerator {
 - 제목 (H1)
 - 시장 요약 (2-3문단)
 - 주요 종목 분석
-- AutoTrade KR 전략 성과 요약
+- Alphix 전략 성과 요약
 - 다음 주 전망
 
 반드시 포함: "⚠️ 과거 수익률이 미래 수익을 보장하지 않습니다. 투자 원금 손실이 발생할 수 있습니다."
@@ -52,7 +52,7 @@ export class ContentGenerator {
 3. 스레드 (300자 이내)
 
 모든 포스트에 포함:
-- AutoTrade KR 언급
+- Alphix 언급
 - "투자 원금 손실 가능" 면책 고지
 - 수익률 보장 문구 절대 금지
 
@@ -66,9 +66,9 @@ JSON 형식으로 반환: {"twitter": "...", "instagram": "...", "threads": "...
       // fallback
     }
     return {
-      twitter: `📊 ${topic} — AutoTrade KR에서 자동매매로 스마트하게 투자하세요! ⚠️ 투자 원금 손실 가능 #자동매매 #주식투자 #퀀트`,
-      instagram: `📈 ${topic}\n\nAutoTrade KR로 코딩 없이 자동매매를 시작하세요.\n\n⚠️ 투자 원금 손실이 발생할 수 있습니다.\n\n#자동매매 #주식투자 #퀀트투자 #백테스팅 #자동매매프로그램 #KOSPI #주식자동매매 #투자 #재테크 #AutoTradeKR`,
-      threads: `📊 ${topic}\n\nAutoTrade KR — 한국 주식 자동매매 플랫폼\n\n⚠️ 투자 원금 손실 가능. 과거 수익률이 미래를 보장하지 않습니다.`,
+      twitter: `📊 ${topic} — Alphix에서 자동매매로 스마트하게 투자하세요! ⚠️ 투자 원금 손실 가능 #자동매매 #주식투자 #퀀트`,
+      instagram: `📈 ${topic}\n\nAlphix로 코딩 없이 자동매매를 시작하세요.\n\n⚠️ 투자 원금 손실이 발생할 수 있습니다.\n\n#자동매매 #주식투자 #퀀트투자 #백테스팅 #자동매매프로그램 #KOSPI #주식자동매매 #투자 #재테크 #AlphixKR`,
+      threads: `📊 ${topic}\n\nAlphix — 한국 주식 자동매매 플랫폼\n\n⚠️ 투자 원금 손실 가능. 과거 수익률이 미래를 보장하지 않습니다.`,
     }
   }
 
@@ -79,7 +79,7 @@ JSON 형식으로 반환: {"twitter": "...", "instagram": "...", "threads": "...
     strategyReturn: number
     newFeature?: string
   }): Promise<string> {
-    return `# AutoTrade KR 주간 뉴스레터 #${data.weekNumber}
+    return `# Alphix 주간 뉴스레터 #${data.weekNumber}
 
 ## 📊 이번 주 시장 요약
 ${data.marketSummary}

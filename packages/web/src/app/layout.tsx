@@ -4,7 +4,7 @@ import './globals.css'
 import { PWARegister } from '@/components/pwa/pwa-register'
 
 export const metadata: Metadata = {
-  title: 'AutoTrade KR — 한국 주식 자동매매 플랫폼',
+  title: 'Alphix — 한국 주식 자동매매 플랫폼',
   description:
     '코딩 없이 한국 주식(KOSPI/KOSDAQ) 자동매매. 백테스팅으로 전략 검증 후 실전 투자. 무료로 시작하세요.',
   keywords: [
@@ -18,16 +18,16 @@ export const metadata: Metadata = {
     '알고리즘 트레이딩',
   ],
   openGraph: {
-    title: 'AutoTrade KR — 한국 주식 자동매매 플랫폼',
+    title: 'Alphix — 한국 주식 자동매매 플랫폼',
     description:
       '코딩 없이 한국 주식 자동매매. 백테스팅으로 전략 검증 후 실전 투자.',
     type: 'website',
     locale: 'ko_KR',
-    siteName: 'AutoTrade KR',
+    siteName: 'Alphix',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AutoTrade KR — 한국 주식 자동매매 플랫폼',
+    title: 'Alphix — 한국 주식 자동매매 플랫폼',
     description:
       '코딩 없이 한국 주식 자동매매. 백테스팅으로 전략 검증 후 실전 투자.',
   },
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'AutoTrade KR',
+    title: 'Alphix',
   },
   other: {
     'mobile-web-app-capable': 'yes',

@@ -176,8 +176,8 @@ export default function MarketingPage() {
           <p className="mt-2 text-sm text-gray-600">
             이번 주 KOSPI는 +1.2% 상승하며 2,650선을 유지했습니다. 반도체 업종이
             강세를 보이며 삼성전자(+2.5%), SK하이닉스(+3.1%)가 시장을
-            견인했습니다. AutoTrade KR의 MA 크로스오버 전략은 이번 주 +1.2%의
-            수익률을 기록했습니다...
+            견인했습니다. Alphix의 MA 크로스오버 전략은 이번 주 +1.2%의 수익률을
+            기록했습니다...
           </p>
           <p className="mt-2 text-xs text-amber-600">
             ⚠️ 과거 수익률이 미래 수익을 보장하지 않습니다.

@@ -23,7 +23,7 @@ function printBanner(): void {
   // eslint-disable-next-line no-console
   console.log(`
 ╔══════════════════════════════════════════╗
-║     AutoTrade KR - Trading Daemon        ║
+║     Alphix - Trading Daemon        ║
 ║     한국 주식 자동매매 엔진              ║
 ╚══════════════════════════════════════════╝
 
@@ -87,7 +87,7 @@ async function main(): Promise<void> {
     notifications.notify(
       'trade_executed',
       'Daemon Started',
-      `AutoTrade KR 데몬이 시작되었습니다. 전략: ${ENV.STRATEGY}`
+      `Alphix 데몬이 시작되었습니다. 전략: ${ENV.STRATEGY}`
     )
   })
 
@@ -164,7 +164,7 @@ async function main(): Promise<void> {
     await notifications.notify(
       'trade_executed',
       'Daemon Stopped',
-      'AutoTrade KR 데몬이 종료되었습니다.'
+      'Alphix 데몬이 종료되었습니다.'
     )
     process.exit(0)
   }

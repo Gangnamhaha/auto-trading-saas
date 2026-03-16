@@ -1,4 +1,4 @@
-const CACHE_NAME = 'autotrading-v1'
+const CACHE_NAME = 'alphix-v1'
 const STATIC_ASSETS = [
   '/',
   '/dashboard',
@@ -58,7 +58,7 @@ self.addEventListener('fetch', (event) => {
 
 // 푸시 알림 수신
 self.addEventListener('push', (event) => {
-  const data = event.data ? event.data.json() : { title: 'AutoTrade KR', body: '새로운 알림' }
+  const data = event.data ? event.data.json() : { title: 'Alphix KR', body: '새로운 알림' }
   event.waitUntil(
     self.registration.showNotification(data.title, {
       body: data.body,

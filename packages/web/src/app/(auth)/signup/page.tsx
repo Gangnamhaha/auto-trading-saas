@@ -27,7 +27,7 @@ export default function SignupPage() {
     <Card>
       <CardHeader className="text-center">
         <Link href="/" className="mx-auto text-2xl font-bold text-primary-600">
-          AutoTrade
+          Alphix
         </Link>
         <CardTitle className="mt-4">회원가입</CardTitle>
         <CardDescription>

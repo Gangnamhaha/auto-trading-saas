@@ -1,6 +1,6 @@
-# 🚀 AutoTrade KR — 한국/미국 주식 + 암호화폐 자동매매 SaaS
+# 🚀 Alphix — 한국/미국 주식 + 암호화폐 자동매매 SaaS
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Gangnamhaha/auto-trading-saas&project-name=autotrade-kr&root-directory=packages/web)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Gangnamhaha/alphix&project-name=autotrade-kr&root-directory=packages/web)
 
 > ⚠️ 투자 원금 손실이 발생할 수 있습니다. 과거 수익률이 미래 수익률을 보장하지 않습니다.
 
@@ -39,8 +39,8 @@ packages/
 
 ```bash
 # 클론
-git clone https://github.com/Gangnamhaha/auto-trading-saas
-cd auto-trading-saas
+git clone https://github.com/Gangnamhaha/alphix
+cd alphix
 
 # 설치
 bun install

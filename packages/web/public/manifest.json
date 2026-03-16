@@ -1,6 +1,6 @@
 {
-  "name": "AutoTrade KR",
-  "short_name": "AutoTrade",
+  "name": "Alphix",
+  "short_name": "Alphix",
   "description": "한국/미국 주식 + 암호화폐 자동매매 플랫폼",
   "start_url": "/dashboard",
   "display": "standalone",

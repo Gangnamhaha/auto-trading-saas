@@ -51,7 +51,7 @@ export default function ForgotPasswordPage() {
     <Card>
       <CardHeader className="text-center">
         <Link href="/" className="mx-auto text-2xl font-bold text-primary-600">
-          AutoTrade
+          Alphix
         </Link>
         <CardTitle className="mt-4">비밀번호 재설정</CardTitle>
         <CardDescription>

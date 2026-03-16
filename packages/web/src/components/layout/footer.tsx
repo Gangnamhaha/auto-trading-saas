@@ -6,7 +6,7 @@ export function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid gap-8 md:grid-cols-4">
           <div className="space-y-3">
-            <h3 className="text-lg font-bold text-primary-600">AutoTrade</h3>
+            <h3 className="text-lg font-bold text-primary-600">Alphix</h3>
             <p className="text-sm text-gray-600">한국 주식 자동매매 플랫폼</p>
           </div>
           <div>
@@ -73,7 +73,7 @@ export function Footer() {
         <div className="mt-8 border-t border-gray-200 pt-8">
           <Disclaimer />
           <p className="mt-4 text-center text-xs text-gray-500">
-            © {new Date().getFullYear()} AutoTrade. All rights reserved.
+            © {new Date().getFullYear()} Alphix. All rights reserved.
           </p>
         </div>
       </div>

@@ -15,7 +15,7 @@ export function PushNotificationToggle() {
       if (permission === 'granted') {
         setEnabled(true)
         // 테스트 알림
-        new Notification('AutoTrade KR', {
+        new Notification('Alphix', {
           body: '푸시 알림이 활성화되었습니다! 매매 체결 시 알림을 받습니다.',
           icon: '/icons/icon-192.svg',
         })

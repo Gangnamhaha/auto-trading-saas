@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events'
 
 /**
- * AutoTrade KR 텔레그램 봇
+ * Alphix 텔레그램 봇
  *
  * 기능:
  * - 매매 체결 알림 (BUY/SELL + 종목 + 가격)
@@ -36,7 +36,7 @@ export class TelegramBot extends EventEmitter {
     this.commands.set(
       '/start',
       async () =>
-        '🤖 AutoTrade KR 봇이 활성화되었습니다!\n\n' +
+        '🤖 Alphix 봇이 활성화되었습니다!\n\n' +
         '📋 명령어 목록:\n' +
         '/status — 데몬 상태 확인\n' +
         '/balance — 잔고 조회\n' +
@@ -51,7 +51,7 @@ export class TelegramBot extends EventEmitter {
     this.commands.set(
       '/help',
       async () =>
-        '📋 AutoTrade KR 봇 명령어\n\n' +
+        '📋 Alphix 봇 명령어\n\n' +
         '/status — 데몬 상태 (실행중/중지/시장 상태)\n' +
         '/balance — 현재 잔고 및 포지션\n' +
         '/strategies — 활성 전략 목록\n' +

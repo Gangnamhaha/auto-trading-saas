@@ -38,7 +38,7 @@ export default function DashboardLayout({
             </svg>
           </button>
           <span className="ml-4 text-xl font-bold text-primary-600">
-            AutoTrade
+            Alphix
           </span>
         </div>
 

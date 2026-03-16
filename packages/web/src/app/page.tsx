@@ -15,7 +15,7 @@ import { TrendingUp, Settings2, FlaskConical, Check, Mail } from 'lucide-react'
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'AutoTrade KR',
+  name: 'Alphix',
   description:
     '한국 주식(KOSPI/KOSDAQ) 자동매매 플랫폼. 코딩 없이 전략 설정, 백테스팅, 실전 트레이딩.',
   applicationCategory: 'FinanceApplication',
@@ -129,7 +129,7 @@ export default function HomePage() {
         <section className="px-4 py-20 sm:px-6 lg:px-8">
           <div className="container mx-auto">
             <h2 className="text-center text-3xl font-bold text-gray-900">
-              왜 AutoTrade인가요?
+              왜 Alphix인가요?
             </h2>
             <div className="mt-12 grid gap-8 md:grid-cols-3">
               {features.map((feature) => (
