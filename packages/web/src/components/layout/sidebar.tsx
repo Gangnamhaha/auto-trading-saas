@@ -44,6 +44,11 @@ const sidebarLinks = [
     icon: TrendingUp,
   },
   {
+    href: '/marketing',
+    label: '마케팅 자동화',
+    icon: LineChart,
+  },
+  {
     href: '/admin',
     label: '관리자',
     icon: Settings,
