@@ -39,6 +39,11 @@ const sidebarLinks = [
     icon: Settings,
   },
   {
+    href: '/social',
+    label: '소셜 트레이딩',
+    icon: TrendingUp,
+  },
+  {
     href: '/admin',
     label: '관리자',
     icon: Settings,
