@@ -39,6 +39,11 @@ const sidebarLinks = [
     icon: TrendingUp,
   },
   {
+    href: '/autopilot',
+    label: '오토파일럿',
+    icon: TrendingUp,
+  },
+  {
     href: '/strategy-builder',
     label: '전략 빌더',
     icon: Settings,
