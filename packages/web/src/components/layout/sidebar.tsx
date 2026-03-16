@@ -74,7 +74,7 @@ const sidebarLinks = [
     icon: Settings,
   },
   {
-    href: '/admin',
+    href: '/admin/dashboard',
     label: '관리자',
     icon: Settings,
   },
