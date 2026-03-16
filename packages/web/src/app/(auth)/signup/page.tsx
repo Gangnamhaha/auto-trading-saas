@@ -49,7 +49,12 @@ export default function SignupPage() {
 
       setSuccess(true)
       setTimeout(() => {
-        window.location.href = '/login'
+        // 자동 로그인
+        if (data.accessToken) {
+          localStorage.setItem('accessToken', data.accessToken)
+          localStorage.setItem('refreshToken', data.refreshToken)
+        }
+        window.location.href = '/dashboard'
       }, 2000)
     } catch {
       setError('서버 연결에 실패했습니다. 다시 시도해주세요.')
