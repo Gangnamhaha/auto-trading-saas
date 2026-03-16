@@ -64,7 +64,7 @@ export default function SignupPage() {
         <div className="w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-lg">
           <span className="text-5xl">🎉</span>
           <h2 className="mt-4 text-2xl font-bold">회원가입 완료!</h2>
-          <p className="mt-2 text-gray-500">로그인 페이지로 이동합니다...</p>
+          <p className="mt-2 text-gray-500">대시보드로 이동합니다...</p>
         </div>
       </div>
     )
