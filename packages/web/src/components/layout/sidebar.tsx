@@ -34,6 +34,11 @@ const sidebarLinks = [
     icon: LineChart,
   },
   {
+    href: '/screener',
+    label: '종목 추천',
+    icon: TrendingUp,
+  },
+  {
     href: '/settings/broker',
     label: '브로커 연결',
     icon: Settings,
