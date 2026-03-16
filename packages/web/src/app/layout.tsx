@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
 import { PWARegister } from '@/components/pwa/pwa-register'
+import { I18nProvider } from '@/lib/i18n'
 
 export const metadata: Metadata = {
   title: 'Alphix — 한국 주식 자동매매 플랫폼',
@@ -75,7 +76,7 @@ export default function RootLayout({
         </>
       )}
       <body className="min-h-screen bg-white antialiased">
-        {children}
+        <I18nProvider>{children}</I18nProvider>
         <PWARegister />
       </body>
     </html>
