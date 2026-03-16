@@ -10,6 +10,7 @@ import { BollingerBandsStrategy } from '../strategy/bollinger-bands'
 import { MACDStrategy } from '../strategy/macd'
 import { GridTradingStrategy } from '../strategy/grid-trading'
 import { AIStrategy } from '../strategy/ai-strategy'
+import { UltraAlphaStrategy } from '../strategy/ultra-alpha'
 import type { IStrategy } from '../strategy/types'
 import { RiskManager } from '../risk/risk-manager'
 import { CircuitBreaker } from '../risk/circuit-breaker'
@@ -97,6 +98,13 @@ export class TradingDaemon extends EventEmitter {
           }
         )
       case 'grid_trading':
+      case 'ultra_alpha':
+        return new UltraAlphaStrategy(
+          params as {
+            sensitivity: 'conservative' | 'balanced' | 'aggressive'
+            multiTimeframe: boolean
+          }
+        )
       case 'ai_analysis':
         return new AIStrategy(
           params as {
