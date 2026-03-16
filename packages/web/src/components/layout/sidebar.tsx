@@ -29,6 +29,11 @@ const sidebarLinks = [
     icon: TestTube,
   },
   {
+    href: '/chart',
+    label: '실시간 차트',
+    icon: LineChart,
+  },
+  {
     href: '/settings/broker',
     label: '브로커 연결',
     icon: Settings,
