@@ -73,11 +73,6 @@ const sidebarLinks = [
     label: '알림 센터',
     icon: Settings,
   },
-  {
-    href: '/admin/dashboard',
-    label: '관리자',
-    icon: Settings,
-  },
 ]
 
 export function Sidebar() {
