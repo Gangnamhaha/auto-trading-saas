@@ -64,6 +64,16 @@ const sidebarLinks = [
     icon: LineChart,
   },
   {
+    href: '/analytics',
+    label: '수익 분석',
+    icon: LineChart,
+  },
+  {
+    href: '/notifications',
+    label: '알림 센터',
+    icon: Settings,
+  },
+  {
     href: '/admin',
     label: '관리자',
     icon: Settings,
