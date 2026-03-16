@@ -38,6 +38,11 @@ const sidebarLinks = [
     label: '브로커 연결',
     icon: Settings,
   },
+  {
+    href: '/admin',
+    label: '관리자',
+    icon: Settings,
+  },
 ]
 
 export function Sidebar() {
