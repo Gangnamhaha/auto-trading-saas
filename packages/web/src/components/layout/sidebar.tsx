@@ -39,6 +39,11 @@ const sidebarLinks = [
     icon: TrendingUp,
   },
   {
+    href: '/strategy-builder',
+    label: '전략 빌더',
+    icon: Settings,
+  },
+  {
     href: '/settings/broker',
     label: '브로커 연결',
     icon: Settings,
