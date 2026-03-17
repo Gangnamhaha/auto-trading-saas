@@ -6,227 +6,175 @@ export default function AdminLoginPage() {
   const [adminId, setAdminId] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
 
-  const handleLogin = async (e: React.FormEvent) => {
+  function handleLogin(e: React.FormEvent) {
     e.preventDefault()
     setError('')
-    setLoading(true)
 
     if (adminId === 'admin' && password === '7777') {
       window.location.href = '/admin/dashboard'
     } else {
-      setError('관리자 ID 또는 비밀번호가 올바르지 않습니다.')
+      setError('아이디 또는 비밀번호가 틀렸습니다.')
     }
-    setLoading(false)
   }
 
   return (
     <div
       style={{
-        display: 'flex',
         minHeight: '100vh',
+        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(135deg, #1a1a2e, #16213e)',
-        padding: '16px',
+        background: '#111827',
+        padding: 20,
       }}
     >
-      <div style={{ width: '100%', maxWidth: '420px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+      <div style={{ width: '100%', maxWidth: 380 }}>
+        {/* 로고 */}
+        <div style={{ textAlign: 'center', marginBottom: 40 }}>
           <div
             style={{
-              display: 'inline-flex',
-              width: '64px',
-              height: '64px',
+              width: 60,
+              height: 60,
+              margin: '0 auto',
+              borderRadius: 14,
+              background: '#ef4444',
+              display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              borderRadius: '16px',
-              background: 'linear-gradient(135deg, #ef4444, #f97316)',
-              fontSize: '24px',
+              color: '#fff',
+              fontSize: 28,
               fontWeight: 900,
-              color: 'white',
-              boxShadow: '0 8px 32px rgba(239,68,68,0.3)',
             }}
           >
             A
           </div>
-          <h1
+          <p
             style={{
-              marginTop: '16px',
-              fontSize: '24px',
-              fontWeight: 900,
-              color: 'white',
+              color: '#fff',
+              fontSize: 22,
+              fontWeight: 800,
+              marginTop: 14,
             }}
           >
-            Alphix 관리자
-          </h1>
-          <p style={{ marginTop: '4px', color: '#9ca3af' }}>
-            관리자 전용 로그인
+            관리자
           </p>
         </div>
 
-        <div
+        {/* 폼 */}
+        <form
+          onSubmit={handleLogin}
           style={{
-            borderRadius: '16px',
-            border: '1px solid #374151',
-            background: 'rgba(31,41,55,0.5)',
-            padding: '24px',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+            background: '#1f2937',
+            borderRadius: 14,
+            padding: 28,
           }}
         >
-          <form onSubmit={handleLogin}>
-            <div style={{ marginBottom: '16px' }}>
-              <label
-                style={{
-                  display: 'block',
-                  fontSize: '14px',
-                  fontWeight: '500',
-                  color: '#d1d5db',
-                  marginBottom: '4px',
-                }}
-              >
-                관리자 ID
-              </label>
-              <div style={{ position: 'relative' }}>
-                <span
-                  style={{
-                    position: 'absolute',
-                    left: '12px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: '#6b7280',
-                  }}
-                >
-                  👤
-                </span>
-                <input
-                  type="text"
-                  value={adminId}
-                  onChange={(e) => setAdminId(e.target.value)}
-                  required
-                  placeholder="관리자 ID"
-                  autoComplete="username"
-                  style={{
-                    width: '100%',
-                    padding: '12px 12px 12px 40px',
-                    border: '1px solid #4b5563',
-                    background: '#374151',
-                    borderRadius: '12px',
-                    color: 'white',
-                    fontSize: '16px',
-                    boxSizing: 'border-box',
-                    outline: 'none',
-                  }}
-                />
-              </div>
-            </div>
-
-            <div style={{ marginBottom: '16px' }}>
-              <label
-                style={{
-                  display: 'block',
-                  fontSize: '14px',
-                  fontWeight: '500',
-                  color: '#d1d5db',
-                  marginBottom: '4px',
-                }}
-              >
-                비밀번호
-              </label>
-              <div style={{ position: 'relative' }}>
-                <span
-                  style={{
-                    position: 'absolute',
-                    left: '12px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: '#6b7280',
-                  }}
-                >
-                  🔑
-                </span>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  placeholder="••••"
-                  autoComplete="current-password"
-                  style={{
-                    width: '100%',
-                    padding: '12px 12px 12px 40px',
-                    border: '1px solid #4b5563',
-                    background: '#374151',
-                    borderRadius: '12px',
-                    color: 'white',
-                    fontSize: '16px',
-                    boxSizing: 'border-box',
-                    outline: 'none',
-                  }}
-                />
-              </div>
-            </div>
-
-            {error && (
-              <div
-                style={{
-                  padding: '12px',
-                  background: 'rgba(239,68,68,0.1)',
-                  borderRadius: '8px',
-                  color: '#f87171',
-                  fontSize: '14px',
-                  marginBottom: '16px',
-                }}
-              >
-                ❌ {error}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              disabled={loading}
+          <div style={{ marginBottom: 18 }}>
+            <label
               style={{
-                width: '100%',
-                padding: '12px',
-                background: loading
-                  ? '#6b7280'
-                  : 'linear-gradient(135deg, #dc2626, #ea580c)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '12px',
-                fontSize: '16px',
-                fontWeight: 'bold',
-                cursor: loading ? 'not-allowed' : 'pointer',
+                color: '#d1d5db',
+                fontSize: 13,
+                display: 'block',
+                marginBottom: 6,
               }}
             >
-              {loading ? '확인 중...' : '🔐 관리자 로그인'}
-            </button>
-          </form>
-        </div>
+              아이디
+            </label>
+            <input
+              type="text"
+              value={adminId}
+              onChange={(e) => setAdminId(e.target.value)}
+              placeholder="admin"
+              required
+              autoComplete="username"
+              style={{
+                width: '100%',
+                boxSizing: 'border-box',
+                padding: '11px 14px',
+                background: '#374151',
+                border: '1px solid #4b5563',
+                borderRadius: 10,
+                color: '#fff',
+                fontSize: 16,
+                outline: 'none',
+              }}
+            />
+          </div>
 
-        <div style={{ marginTop: '24px', textAlign: 'center' }}>
-          <a
-            href="/login"
+          <div style={{ marginBottom: 18 }}>
+            <label
+              style={{
+                color: '#d1d5db',
+                fontSize: 13,
+                display: 'block',
+                marginBottom: 6,
+              }}
+            >
+              비밀번호
+            </label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••"
+              required
+              autoComplete="current-password"
+              style={{
+                width: '100%',
+                boxSizing: 'border-box',
+                padding: '11px 14px',
+                background: '#374151',
+                border: '1px solid #4b5563',
+                borderRadius: 10,
+                color: '#fff',
+                fontSize: 16,
+                outline: 'none',
+              }}
+            />
+          </div>
+
+          {error && (
+            <p
+              style={{
+                background: '#7f1d1d',
+                color: '#fca5a5',
+                padding: '10px 14px',
+                borderRadius: 8,
+                fontSize: 14,
+                marginBottom: 18,
+              }}
+            >
+              {error}
+            </p>
+          )}
+
+          <button
+            type="submit"
             style={{
-              fontSize: '14px',
-              color: '#6b7280',
-              textDecoration: 'none',
+              width: '100%',
+              padding: 13,
+              background: '#ef4444',
+              color: '#fff',
+              border: 'none',
+              borderRadius: 10,
+              fontSize: 16,
+              fontWeight: 700,
+              cursor: 'pointer',
             }}
           >
-            일반 사용자 로그인 →
+            로그인
+          </button>
+        </form>
+
+        <p style={{ textAlign: 'center', marginTop: 24 }}>
+          <a
+            href="/login"
+            style={{ color: '#6b7280', fontSize: 13, textDecoration: 'none' }}
+          >
+            일반 로그인 →
           </a>
-        </div>
-        <div
-          style={{
-            marginTop: '16px',
-            textAlign: 'center',
-            fontSize: '12px',
-            color: '#4b5563',
-          }}
-        >
-          🔒 관리자 전용 페이지입니다.
-        </div>
+        </p>
       </div>
     </div>
   )
