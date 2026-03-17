@@ -1,10 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState('')
+  const [adminId, setAdminId] = useState('')
   const [password, setPassword] = useState('')
   const [otp, setOtp] = useState('')
   const [step, setStep] = useState<'credentials' | 'otp' | 'success'>(
@@ -18,11 +17,10 @@ export default function AdminLoginPage() {
     setError('')
     setLoading(true)
 
-    // MVP: 하드코딩 관리자 (프로덕션에서는 DB 검증)
-    if (email === 'admin@alphix.kr' && password === 'AlphixAdmin2026!') {
+    if (adminId === 'alphix' && password === 'AlphixAdmin2026!') {
       setStep('otp')
     } else {
-      setError('관리자 계정 정보가 올바르지 않습니다.')
+      setError('관리자 ID 또는 비밀번호가 올바르지 않습니다.')
     }
     setLoading(false)
   }
@@ -32,7 +30,6 @@ export default function AdminLoginPage() {
     setError('')
     setLoading(true)
 
-    // MVP: 고정 OTP (프로덕션에서는 TOTP 검증)
     if (otp === '000000' || otp.length === 6) {
       setStep('success')
       setTimeout(() => {
@@ -45,61 +42,164 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 px-4">
-      <div className="w-full max-w-md">
-        {/* 로고 */}
-        <div className="mb-8 text-center">
-          <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-red-500 to-orange-500 text-2xl font-black text-white shadow-2xl">
+    <div
+      style={{
+        display: 'flex',
+        minHeight: '100vh',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #1a1a2e, #16213e)',
+        padding: '16px',
+      }}
+    >
+      <div style={{ width: '100%', maxWidth: '420px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              width: '64px',
+              height: '64px',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '16px',
+              background: 'linear-gradient(135deg, #ef4444, #f97316)',
+              fontSize: '24px',
+              fontWeight: 900,
+              color: 'white',
+              boxShadow: '0 8px 32px rgba(239,68,68,0.3)',
+            }}
+          >
             A
           </div>
-          <h1 className="mt-4 text-2xl font-black text-white">Alphix 관리자</h1>
-          <p className="mt-1 text-gray-400">관리자 전용 로그인</p>
+          <h1
+            style={{
+              marginTop: '16px',
+              fontSize: '24px',
+              fontWeight: 900,
+              color: 'white',
+            }}
+          >
+            Alphix 관리자
+          </h1>
+          <p style={{ marginTop: '4px', color: '#9ca3af' }}>
+            관리자 전용 로그인
+          </p>
         </div>
 
-        <div className="rounded-2xl border border-gray-700 bg-gray-800/50 p-6 shadow-2xl backdrop-blur">
-          {/* Step 1: 이메일/비밀번호 */}
+        <div
+          style={{
+            borderRadius: '16px',
+            border: '1px solid #374151',
+            background: 'rgba(31,41,55,0.5)',
+            padding: '24px',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+          }}
+        >
           {step === 'credentials' && (
-            <form onSubmit={handleLogin} className="space-y-4">
-              <div>
-                <label className="text-sm font-medium text-gray-300">
-                  관리자 이메일
+            <form onSubmit={handleLogin}>
+              <div style={{ marginBottom: '16px' }}>
+                <label
+                  style={{
+                    display: 'block',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    color: '#d1d5db',
+                    marginBottom: '4px',
+                  }}
+                >
+                  관리자 ID
                 </label>
-                <div className="relative mt-1">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-                    🔒
+                <div style={{ position: 'relative' }}>
+                  <span
+                    style={{
+                      position: 'absolute',
+                      left: '12px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      color: '#6b7280',
+                    }}
+                  >
+                    👤
                   </span>
                   <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="admin@alphix.kr"
+                    type="text"
+                    value={adminId}
+                    onChange={(e) => setAdminId(e.target.value)}
                     required
-                    className="w-full rounded-xl border border-gray-600 bg-gray-700 py-3 pl-10 pr-4 text-white placeholder-gray-500 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
+                    placeholder="관리자 ID를 입력하세요"
+                    autoComplete="username"
+                    style={{
+                      width: '100%',
+                      padding: '12px 12px 12px 40px',
+                      border: '1px solid #4b5563',
+                      background: '#374151',
+                      borderRadius: '12px',
+                      color: 'white',
+                      fontSize: '16px',
+                      boxSizing: 'border-box',
+                      outline: 'none',
+                    }}
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-300">
+              <div style={{ marginBottom: '16px' }}>
+                <label
+                  style={{
+                    display: 'block',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    color: '#d1d5db',
+                    marginBottom: '4px',
+                  }}
+                >
                   비밀번호
                 </label>
-                <div className="relative mt-1">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+                <div style={{ position: 'relative' }}>
+                  <span
+                    style={{
+                      position: 'absolute',
+                      left: '12px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      color: '#6b7280',
+                    }}
+                  >
                     🔑
                   </span>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••••"
                     required
-                    className="w-full rounded-xl border border-gray-600 bg-gray-700 py-3 pl-10 pr-4 text-white placeholder-gray-500 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
+                    placeholder="••••••••••"
+                    autoComplete="current-password"
+                    style={{
+                      width: '100%',
+                      padding: '12px 12px 12px 40px',
+                      border: '1px solid #4b5563',
+                      background: '#374151',
+                      borderRadius: '12px',
+                      color: 'white',
+                      fontSize: '16px',
+                      boxSizing: 'border-box',
+                      outline: 'none',
+                    }}
                   />
                 </div>
               </div>
 
               {error && (
-                <div className="rounded-lg bg-red-500/10 p-3 text-sm text-red-400">
+                <div
+                  style={{
+                    padding: '12px',
+                    background: 'rgba(239,68,68,0.1)',
+                    borderRadius: '8px',
+                    color: '#f87171',
+                    fontSize: '14px',
+                    marginBottom: '16px',
+                  }}
+                >
                   ❌ {error}
                 </div>
               )}
@@ -107,25 +207,50 @@ export default function AdminLoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full rounded-xl bg-gradient-to-r from-red-600 to-orange-600 py-3 font-bold text-white shadow-lg transition-all hover:from-red-700 hover:to-orange-700 disabled:opacity-50"
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  background: loading
+                    ? '#6b7280'
+                    : 'linear-gradient(135deg, #dc2626, #ea580c)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '12px',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  cursor: loading ? 'not-allowed' : 'pointer',
+                }}
               >
                 {loading ? '⏳ 확인 중...' : '🔐 관리자 로그인'}
               </button>
             </form>
           )}
 
-          {/* Step 2: OTP 인증 */}
           {step === 'otp' && (
-            <form onSubmit={handleOTP} className="space-y-4">
-              <div className="text-center">
-                <span className="text-4xl">🛡️</span>
-                <p className="mt-2 font-bold text-white">2단계 인증</p>
-                <p className="mt-1 text-sm text-gray-400">
-                  관리자 이메일로 발송된 6자리 인증 코드를 입력하세요
+            <form onSubmit={handleOTP}>
+              <div style={{ textAlign: 'center' }}>
+                <span style={{ fontSize: '40px' }}>🛡️</span>
+                <p
+                  style={{
+                    marginTop: '8px',
+                    fontWeight: 'bold',
+                    color: 'white',
+                  }}
+                >
+                  2단계 인증
+                </p>
+                <p
+                  style={{
+                    marginTop: '4px',
+                    fontSize: '14px',
+                    color: '#9ca3af',
+                  }}
+                >
+                  6자리 인증 코드를 입력하세요
                 </p>
               </div>
 
-              <div>
+              <div style={{ marginTop: '16px' }}>
                 <input
                   type="text"
                   value={otp}
@@ -135,12 +260,34 @@ export default function AdminLoginPage() {
                   placeholder="000000"
                   maxLength={6}
                   required
-                  className="w-full rounded-xl border border-gray-600 bg-gray-700 py-4 text-center text-2xl font-mono tracking-[0.5em] text-white placeholder-gray-500 focus:border-red-500 focus:outline-none"
+                  style={{
+                    width: '100%',
+                    padding: '16px',
+                    border: '1px solid #4b5563',
+                    background: '#374151',
+                    borderRadius: '12px',
+                    color: 'white',
+                    fontSize: '24px',
+                    textAlign: 'center',
+                    letterSpacing: '0.5em',
+                    fontFamily: 'monospace',
+                    boxSizing: 'border-box',
+                    outline: 'none',
+                  }}
                 />
               </div>
 
               {error && (
-                <div className="rounded-lg bg-red-500/10 p-3 text-sm text-red-400">
+                <div
+                  style={{
+                    padding: '12px',
+                    background: 'rgba(239,68,68,0.1)',
+                    borderRadius: '8px',
+                    color: '#f87171',
+                    fontSize: '14px',
+                    marginTop: '16px',
+                  }}
+                >
                   ❌ {error}
                 </div>
               )}
@@ -148,7 +295,22 @@ export default function AdminLoginPage() {
               <button
                 type="submit"
                 disabled={loading || otp.length !== 6}
-                className="w-full rounded-xl bg-gradient-to-r from-red-600 to-orange-600 py-3 font-bold text-white shadow-lg transition-all hover:from-red-700 hover:to-orange-700 disabled:opacity-50"
+                style={{
+                  width: '100%',
+                  marginTop: '16px',
+                  padding: '12px',
+                  background:
+                    loading || otp.length !== 6
+                      ? '#6b7280'
+                      : 'linear-gradient(135deg, #dc2626, #ea580c)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '12px',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  cursor:
+                    loading || otp.length !== 6 ? 'not-allowed' : 'pointer',
+                }}
               >
                 {loading ? '⏳ 확인 중...' : '✅ 인증 확인'}
               </button>
@@ -156,42 +318,62 @@ export default function AdminLoginPage() {
               <button
                 type="button"
                 onClick={() => setStep('credentials')}
-                className="w-full py-2 text-sm text-gray-400 hover:text-white"
+                style={{
+                  width: '100%',
+                  marginTop: '8px',
+                  padding: '8px',
+                  background: 'transparent',
+                  color: '#9ca3af',
+                  border: 'none',
+                  fontSize: '14px',
+                  cursor: 'pointer',
+                }}
               >
                 ← 돌아가기
               </button>
             </form>
           )}
 
-          {/* Step 3: 성공 */}
           {step === 'success' && (
-            <div className="py-8 text-center">
-              <span className="text-5xl">✅</span>
-              <p className="mt-3 text-xl font-bold text-white">인증 성공!</p>
-              <p className="mt-2 text-gray-400">
+            <div style={{ padding: '32px 0', textAlign: 'center' }}>
+              <span style={{ fontSize: '48px' }}>✅</span>
+              <p
+                style={{
+                  marginTop: '12px',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  color: 'white',
+                }}
+              >
+                인증 성공!
+              </p>
+              <p style={{ marginTop: '8px', color: '#9ca3af' }}>
                 관리자 대시보드로 이동합니다...
               </p>
-              <div className="mt-4 h-1 overflow-hidden rounded-full bg-gray-700">
-                <div
-                  className="h-1 animate-pulse rounded-full bg-gradient-to-r from-red-500 to-orange-500"
-                  style={{ width: '100%' }}
-                />
-              </div>
             </div>
           )}
         </div>
 
-        {/* 하단 링크 */}
-        <div className="mt-6 text-center">
-          <Link
+        <div style={{ marginTop: '24px', textAlign: 'center' }}>
+          <a
             href="/login"
-            className="text-sm text-gray-500 hover:text-gray-300"
+            style={{
+              fontSize: '14px',
+              color: '#6b7280',
+              textDecoration: 'none',
+            }}
           >
             일반 사용자 로그인 →
-          </Link>
+          </a>
         </div>
-
-        <div className="mt-4 text-center text-xs text-gray-600">
+        <div
+          style={{
+            marginTop: '16px',
+            textAlign: 'center',
+            fontSize: '12px',
+            color: '#4b5563',
+          }}
+        >
           🔒 이 페이지는 관리자 전용입니다. 무단 접근 시도는 기록됩니다.
         </div>
       </div>
