@@ -108,6 +108,12 @@ export default function HomePage() {
               바로 실전 트레이딩을 시작하세요.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Link
+                href="/admin"
+                className="text-sm text-gray-400 hover:text-gray-600 px-3 py-2"
+              >
+                관리자
+              </Link>
               <Link href="/signup">
                 <Button size="lg" className="w-full sm:w-auto">
                   무료로 시작하기
