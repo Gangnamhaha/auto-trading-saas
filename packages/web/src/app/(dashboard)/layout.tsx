@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import { Sidebar } from '@/components/layout/sidebar'
+import { Header } from '@/components/layout/header'
 import { Disclaimer } from '@/components/layout/disclaimer'
 
 export default function DashboardLayout({
@@ -18,6 +19,7 @@ export default function DashboardLayout({
       </div>
 
       <div className="flex flex-1 flex-col overflow-hidden">
+        <Header />
         <div className="md:hidden flex h-16 items-center border-b border-gray-200 bg-white px-4">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}

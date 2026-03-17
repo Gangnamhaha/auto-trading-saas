@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
@@ -77,6 +78,25 @@ const sidebarLinks = [
 
 export function Sidebar() {
   const pathname = usePathname()
+  const [userEmail, setUserEmail] = useState('')
+
+  useEffect(() => {
+    try {
+      const token = localStorage.getItem('accessToken')
+      if (token) {
+        const decoded = JSON.parse(atob(token))
+        setUserEmail(decoded.email || 'User')
+      }
+    } catch {
+      /* ignore */
+    }
+  }, [])
+
+  function handleLogout() {
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('refreshToken')
+    window.location.href = '/login'
+  }
 
   return (
     <aside className="flex h-full w-64 flex-col border-r border-gray-200 bg-white">
@@ -112,10 +132,21 @@ export function Sidebar() {
             <span className="text-sm font-medium">Free 플랜</span>
           </div>
           <p className="mt-1 text-xs text-gray-500">
-            업그레이드하여 더 많은 기능을 사용하세요
+            {userEmail || '업그레이드하여 더 많은 기능을 사용하세요'}
           </p>
         </div>
       </div>
+      {userEmail && (
+        <div className="border-t border-gray-200 p-4">
+          <p className="text-xs text-gray-500 truncate">{userEmail}</p>
+          <button
+            onClick={handleLogout}
+            className="mt-2 w-full rounded-lg bg-gray-100 px-3 py-2 text-sm text-gray-600 hover:bg-gray-200"
+          >
+            로그아웃
+          </button>
+        </div>
+      )}
     </aside>
   )
 }
